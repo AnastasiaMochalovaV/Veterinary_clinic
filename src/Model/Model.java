@@ -9,6 +9,10 @@ public class Model {
 
     private Connection connection;
 
+    private Owner owner = new Owner();
+
+    private Doctor doctor = new Doctor();
+
     public Model() {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -18,11 +22,29 @@ public class Model {
         }
     }
 
+    public void close() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+//    public void setModel(Model model) {
+//        this.connection = model.getConnection();
+//    }
+//
+//    public Connection getConnection() {
+//        return connection;
+//    }
+
     // Метод для аутентификации владельца
-    public boolean authenticateOwner(String login, String password) {
-        String query = "SELECT COUNT(*) FROM owners WHERE login = ? AND password = ?";
+    public boolean authenticateOwner(String phoneNumber, String password) {
+        String query = "SELECT COUNT(*) FROM owners WHERE phone_number = ? AND password = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, login);
+            statement.setString(1, phoneNumber);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -36,10 +58,10 @@ public class Model {
     }
 
     // Метод для аутентификации врача
-    public boolean authenticateDoctor(String login, String password) {
-        String query = "SELECT COUNT(*) FROM doctors WHERE login = ? AND password = ?";
+    public boolean authenticateDoctor(String phoneNumber, String password) {
+        String query = "SELECT COUNT(*) FROM doctors WHERE phone_number = ? AND password = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, login);
+            statement.setString(1, phoneNumber);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

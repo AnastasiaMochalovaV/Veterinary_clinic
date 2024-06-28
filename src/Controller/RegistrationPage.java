@@ -15,7 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-//import model.Model;
+import javafx.stage.Stage;
+import Model.Model;
 
 public class RegistrationPage {
 
@@ -49,7 +50,17 @@ public class RegistrationPage {
     @FXML
     private TextField surnameOnRegistrationPage;
 
-//    private Model model;
+    private Stage primaryStage;
+
+    private Model model;
+
+    private Connection connection;
+
+    @FXML
+    public void setModel(Model model, Stage primaryStage) {
+        this.model = model;
+        this.primaryStage = primaryStage;
+    }
 
     @FXML
     void initialize() {
@@ -61,14 +72,14 @@ public class RegistrationPage {
             }
         });
 
-//        loginOnRegistrationPage.setOnAction(actionEvent -> {
-//            try {
-//                insertOwnerIntoDatabase();
-//                openHomePage();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
+        loginOnRegistrationPage.setOnAction(actionEvent -> {
+            try {
+                insertOwnerIntoDatabase();
+                openHomePage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
@@ -84,15 +95,15 @@ public class RegistrationPage {
         stage.show();
     }
 
-//    @FXML
-//    private boolean insertOwnerIntoDatabase() {
-//        String surname = surnameOnRegistrationPage.getText();
-//        String name = nameOnRegistrationPage.getText();
-//        String patronymic = patronymicOnRegistrationPage.getText();
-//        String phoneNumber = phoneNumberOnRegistrationPage.getText();
-//        String address = addressOnRegistrationPage.getText();
-//        String password = passwordOnRegistrationPage.getText();
-//
-//        return model.registerOwner(surname, name, patronymic, phoneNumber, address, password);
-//    }
+    @FXML
+    private boolean insertOwnerIntoDatabase() {
+        String surname = surnameOnRegistrationPage.getText();
+        String name = nameOnRegistrationPage.getText();
+        String patronymic = patronymicOnRegistrationPage.getText();
+        String phoneNumber = phoneNumberOnRegistrationPage.getText();
+        String address = addressOnRegistrationPage.getText();
+        String password = passwordOnRegistrationPage.getText();
+
+        return model.registerOwner(surname, name, patronymic, phoneNumber, address, password);
+    }
 }

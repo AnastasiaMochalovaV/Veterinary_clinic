@@ -1,8 +1,12 @@
+import Controller.HomePage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import Model.Model;
+import Controller.HomePage;
+import Controller.LoginPage;
 
 public class Main extends Application{
 
@@ -12,17 +16,15 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("View/HomePage.fxml"));
-//        Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+        Parent root = loader.load();
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/HomePage.fxml"));
+        HomePage controller = loader.getController();
+        Model model = new Model();
+        controller.setModel(model, primaryStage);
 
-//        Model model = new Model();
-//        controller.initModel(model, primaryStage);
-//        model.getAllBikeModels();
-
+        primaryStage.setTitle("Ветеринарная клиника");
         primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.setTitle("Veterinary clinic");
         primaryStage.show();
     }
 }

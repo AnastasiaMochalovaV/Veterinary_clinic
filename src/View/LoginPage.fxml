@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -52,5 +53,6 @@
             <Font name="Gilroy-Medium" size="15.0" />
          </font>
       </Button>
+      <CheckBox fx:id="checkDoctorOnLoginPage" layoutX="216.0" layoutY="439.0" mnemonicParsing="false" text="Войти как врач" textFill="#717171" />
    </children>
 </AnchorPane>
