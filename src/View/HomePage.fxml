@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <ScrollPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomePage">
    <content>
       <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: DDD7CF;">
@@ -22,7 +21,7 @@
                   <Point3D />
                </rotationAxis>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="454.0" layoutX="38.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="49.0">
+            <ImageView fitHeight="65.0" fitWidth="133.0" layoutX="38.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="40.0">
                <image>
                   <Image url="@../Assets/Logo.png" />
                </image>
@@ -37,12 +36,12 @@
                   <Font name="Gilroy-Regular" size="20.0" />
                </font>
             </Button>
-            <Text fill="#2b2b2b" layoutX="200.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВЕТЕРИНАРНАЯ" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="385.0">
+            <Text fill="#2b2b2b" layoutX="200.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВЕТЕРИНАРНАЯ" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="335.0">
                <font>
                   <Font name="Gilroy-Bold" size="53.0" />
                </font>
             </Text>
-            <Text fill="#d97714" layoutX="174.0" layoutY="797.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ДЛЯ СОБАК" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="523.0">
+            <Text fill="#d97714" layoutX="174.0" layoutY="797.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ДЛЯ СОБАК" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="473.0">
                <font>
                   <Font name="Gilroy-Bold" size="53.0" />
                </font>
@@ -52,12 +51,12 @@
                   <Font name="Gilroy-Regular" size="20.0" />
                </font>
             </Button>
-            <Text fill="#2b2b2b" layoutX="100.0" layoutY="499.6219993591309" strokeType="OUTSIDE" strokeWidth="0.0" text="КЛИНИКА" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="454.0">
+            <Text fill="#2b2b2b" layoutX="100.0" layoutY="499.6219993591309" strokeType="OUTSIDE" strokeWidth="0.0" text="КЛИНИКА" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="404.0">
                <font>
                   <Font name="Gilroy-Bold" size="53.0" />
                </font>
             </Text>
-            <Text layoutX="242.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Мы позаботимся о Ваших питомцах" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="599.0">
+            <Text layoutX="242.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Мы позаботимся о Ваших питомцах" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="549.0">
                <font>
                   <Font name="Gilroy-Regular" size="24.0" />
                </font>

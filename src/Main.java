@@ -9,6 +9,7 @@ import Controller.HomePage;
 import Controller.LoginPage;
 
 public class Main extends Application{
+    Model model = new Model();
 
     public static void main(String[] args) {
         launch(args);
@@ -20,7 +21,7 @@ public class Main extends Application{
         Parent root = loader.load();
 
         HomePage controller = loader.getController();
-        Model model = new Model();
+
         controller.setModel(model, primaryStage);
 
         primaryStage.setTitle("Ветеринарная клиника");

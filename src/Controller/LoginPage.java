@@ -121,11 +121,6 @@ public class LoginPage {
 
     @FXML
     private void checkAccess() throws IOException {
-        if (model == null) {
-            showAlert("Внутренняя ошибка: модель не установлена.");
-            return;
-        }
-
         String username = loginNameOnLoginPage.getText();
         String password = passwordOnLoginPage.getText();
 
@@ -146,22 +141,6 @@ public class LoginPage {
                 showAlert("Пользователь не найден");
             }
         }
-
-//        boolean isOwnerAuthenticated = model.authenticateOwner(username, password);
-//        if (isOwnerAuthenticated) {
-//            isOwner = true;
-//            openHomePageAfterAuth("/View/HomePageAfterAuth.fxml");
-//            return;
-//        }
-//
-//        boolean isDoctorAuthenticated = model.authenticateDoctor(username, password);
-//        if (isDoctorAuthenticated) {
-//            isOwner = false;
-//            openHomePageAfterAuth("/View/HomePageAfterAuth.fxml");
-//            return;
-//        }
-//
-//        showAlert("Пользователь не найден");
     }
 
     private void showAlert(String message) {
@@ -195,4 +174,3 @@ public class LoginPage {
         passwordOnLoginPage.clear();
     }
 }
-
