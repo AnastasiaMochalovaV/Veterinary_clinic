@@ -2,6 +2,10 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+//import model.Model;
 
 public class RegistrationPage {
 
@@ -44,6 +49,8 @@ public class RegistrationPage {
     @FXML
     private TextField surnameOnRegistrationPage;
 
+//    private Model model;
+
     @FXML
     void initialize() {
         lastOnRegistrationPage.setOnAction(actionEvent -> {
@@ -53,6 +60,15 @@ public class RegistrationPage {
                 e.printStackTrace();
             }
         });
+
+//        loginOnRegistrationPage.setOnAction(actionEvent -> {
+//            try {
+//                insertOwnerIntoDatabase();
+//                openHomePage();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
     }
 
     @FXML
@@ -61,6 +77,22 @@ public class RegistrationPage {
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) lastOnRegistrationPage.getScene().getWindow();
+        currentStage.close();
+
         stage.show();
     }
+
+//    @FXML
+//    private boolean insertOwnerIntoDatabase() {
+//        String surname = surnameOnRegistrationPage.getText();
+//        String name = nameOnRegistrationPage.getText();
+//        String patronymic = patronymicOnRegistrationPage.getText();
+//        String phoneNumber = phoneNumberOnRegistrationPage.getText();
+//        String address = addressOnRegistrationPage.getText();
+//        String password = passwordOnRegistrationPage.getText();
+//
+//        return model.registerOwner(surname, name, patronymic, phoneNumber, address, password);
+//    }
 }

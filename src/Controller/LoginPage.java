@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +36,8 @@ public class LoginPage {
     @FXML
     private PasswordField passwordOnLoginPage;
 
+//    private Model model;
+
     @FXML
     void initialize() {
         lastOnLoginPage.setOnAction(actionEvent -> {
@@ -53,9 +56,9 @@ public class LoginPage {
             }
         });
 
-//        authOnLoginPage.setOnAction(actionEvent -> { // Разделить на клиента и врача
+//        authOnLoginPage.setOnAction(actionEvent -> {
 //            try {
-//                openRegistrationPage();
+//                openHomePageAfterAuth();
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
@@ -68,6 +71,10 @@ public class LoginPage {
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) lastOnLoginPage.getScene().getWindow();
+        currentStage.close();
+
         stage.show();
     }
 
@@ -77,8 +84,54 @@ public class LoginPage {
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) loginOnLoginPage.getScene().getWindow();
+        currentStage.close();
+
         stage.show();
     }
 
 
+    //////////////////////////////////////////////////////////
+
+//    @FXML
+//    private void openHomePageAfterAuth() throws IOException {
+//        String username = loginNameOnLoginPage.getText();
+//        String password = passwordOnLoginPage.getText();
+//
+//        boolean isOwnerAuthenticated = model.authenticateOwner(username, password);
+//        if (isOwnerAuthenticated) {
+//            openHomePage("/View/HomePageAfterAuth.fxml");
+//            return;
+//        }
+//
+//        boolean isDoctorAuthenticated = model.authenticateDoctor(username, password);
+//        if (isDoctorAuthenticated) {
+//            openHomePage("/View/HomePageAfterAuth.fxml");
+//            return;
+//        }
+//
+////        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/HomePageAfterAuth.fxml"));
+////        Parent root = fxmlLoader.load();
+////        Stage stage = new Stage();
+////        stage.setScene(new Scene(root));
+////
+////        Stage currentStage = (Stage) authOnLoginPage.getScene().getWindow();
+////        currentStage.close();
+////
+////        stage.show();
+//    }
+//
+//    private void openHomePage(String fxmlPath) throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+//        Parent root = fxmlLoader.load();
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root));
+//
+//        Stage currentStage = (Stage) authOnLoginPage.getScene().getWindow();
+//        currentStage.close();
+//
+//        stage.show();
+//    }
 }
+

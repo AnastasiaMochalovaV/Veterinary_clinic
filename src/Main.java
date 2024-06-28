@@ -21,8 +21,8 @@ public class Main extends Application{
 //        controller.initModel(model, primaryStage);
 //        model.getAllBikeModels();
 
-        primaryStage.setTitle("Veterinary clinic");
         primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.setTitle("Veterinary clinic");
         primaryStage.show();
     }
 }

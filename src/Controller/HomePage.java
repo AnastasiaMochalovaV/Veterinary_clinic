@@ -53,6 +53,10 @@ public class HomePage {
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) authOnHomePage.getScene().getWindow();
+        currentStage.close();
+
         stage.show();
     }
 
@@ -62,6 +66,10 @@ public class HomePage {
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) loginOnHomePage.getScene().getWindow();
+        currentStage.close();
+
         stage.show();
     }
 }

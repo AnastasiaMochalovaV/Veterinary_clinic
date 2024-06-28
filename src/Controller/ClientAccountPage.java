@@ -28,10 +28,6 @@ public class ClientAccountPage {
 
     @FXML
     void initialize() {
-//        assert changeOnClientPage != null : "fx:id=\"changeOnClientPage\" was not injected: check your FXML file 'ClientAccountPage.fxml'.";
-//        assert chooseDogOnClientPage != null : "fx:id=\"chooseDogOnClientPage\" was not injected: check your FXML file 'ClientAccountPage.fxml'.";
-//        assert homeOnClientPage != null : "fx:id=\"homeOnClientPage\" was not injected: check your FXML file 'ClientAccountPage.fxml'.";
-//        assert recordOnClientPage != null : "fx:id=\"recordOnClientPage\" was not injected: check your FXML file 'ClientAccountPage.fxml'.";
 
     }
 

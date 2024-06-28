@@ -22,8 +22,6 @@ public class DoctorAccountPage {
 
     @FXML
     void initialize() {
-        assert chooseDogOnDoctorPage != null : "fx:id=\"chooseDogOnDoctorPage\" was not injected: check your FXML file 'DoctorAccountPage.fxml'.";
-        assert homeOnDoctorPage != null : "fx:id=\"homeOnDoctorPage\" was not injected: check your FXML file 'DoctorAccountPage.fxml'.";
 
     }
 
