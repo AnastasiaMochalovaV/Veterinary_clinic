@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class DoctorAccountPage {
@@ -23,16 +24,26 @@ public class DoctorAccountPage {
     private URL location;
 
     @FXML
-    private ComboBox<?> chooseDogOnDoctorPage;
+    private Label addressLabel;
+
+    @FXML
+    private Button changeOnDoctorPage;
+
+    @FXML
+    private ComboBox<?> chooseDogOnClientPage;
+
+    @FXML
+    private Label fullNameLabel;
 
     @FXML
     private Button homeOnDoctorPage;
 
+    @FXML
+    private Button recordOnDoctorPage;
+
     private Stage primaryStage;
 
     private Model model;
-
-    private Connection connection;
 
     @FXML
     public void setModel(Model model, Stage primaryStage) {

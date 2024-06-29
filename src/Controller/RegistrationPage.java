@@ -11,12 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Stage;
 import Model.Model;
+import Model.Owner;
 
 public class RegistrationPage {
 
@@ -29,11 +31,11 @@ public class RegistrationPage {
     @FXML
     private TextField addressOnRegistrationPage;
 
-    @FXML
-    private Button lastOnRegistrationPage;
-
-    @FXML
-    private Button loginOnRegistrationPage;
+//    @FXML
+//    private Button lastOnRegistrationPage;
+//
+//    @FXML
+//    private Button loginOnRegistrationPage;
 
     @FXML
     private TextField nameOnRegistrationPage;
@@ -54,8 +56,6 @@ public class RegistrationPage {
 
     private Model model;
 
-    private Connection connection;
-
     @FXML
     public void setModel(Model model, Stage primaryStage) {
         this.model = model;
@@ -63,40 +63,7 @@ public class RegistrationPage {
     }
 
     @FXML
-    void initialize() {
-        lastOnRegistrationPage.setOnAction(actionEvent -> {
-            try {
-                openHomePage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        loginOnRegistrationPage.setOnAction(actionEvent -> {
-            try {
-                insertOwnerIntoDatabase();
-                openHomePage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    @FXML
-    private void openHomePage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-
-        Stage currentStage = (Stage) lastOnRegistrationPage.getScene().getWindow();
-        currentStage.close();
-
-        stage.show();
-    }
-
-    @FXML
-    private boolean insertOwnerIntoDatabase() {
+    private void insertOwnerIntoDatabase() throws IOException {
         String surname = surnameOnRegistrationPage.getText();
         String name = nameOnRegistrationPage.getText();
         String patronymic = patronymicOnRegistrationPage.getText();
@@ -104,6 +71,31 @@ public class RegistrationPage {
         String address = addressOnRegistrationPage.getText();
         String password = passwordOnRegistrationPage.getText();
 
-        return model.registerOwner(surname, name, patronymic, phoneNumber, address, password);
+        Owner owner = new Owner(0, surname, name, patronymic, phoneNumber, address, password);
+
+        if(!model.registerOwner(owner)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Пользователь уже существует");
+            alert.showAndWait();
+        }
+        else{
+            openHomePage();
+        }
+    }
+
+    @FXML
+    private void openHomePage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+
+        Parent root = loader.load();
+        HomePage controller = loader.getController();
+        controller.setModel(model, primaryStage);
+
+        Stage currentStage = (Stage) surnameOnRegistrationPage.getScene().getWindow();
+        currentStage.close();
+
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
     }
 }

@@ -55,7 +55,7 @@
                                         <Font name="Gilroy-Medium" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="changeOnClientPage" mnemonicParsing="false" prefWidth="118.0" text="Редактировать">
+                                <Button fx:id="changeOnClientPage" onAction="#changeData" mnemonicParsing="false" prefWidth="118.0" text="Редактировать">
                                     <VBox.margin>
                                         <Insets top="20.0" />
                                     </VBox.margin>
@@ -122,7 +122,7 @@
                                 <Insets />
                             </opaqueInsets>
                         </VBox>
-                        <Button fx:id="homeOnClientPage" layoutX="196.0" layoutY="82.0" mnemonicParsing="false" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="98.0">
+                        <Button fx:id="homeOnClientPage" layoutX="196.0" layoutY="82.0" onAction="#goToHomePageAfterAuth" mnemonicParsing="false" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="98.0">
                             <font>
                                 <Font name="Gilroy-Regular" size="20.0" />
                             </font>

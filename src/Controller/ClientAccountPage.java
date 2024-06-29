@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ClientAccountPage {
@@ -23,10 +24,16 @@ public class ClientAccountPage {
     private URL location;
 
     @FXML
+    private Label addressLabel;
+
+    @FXML
     private Button changeOnClientPage;
 
     @FXML
     private ComboBox<?> chooseDogOnClientPage;
+
+    @FXML
+    private Label fullNameLabel;
 
     @FXML
     private Button homeOnClientPage;
@@ -38,24 +45,21 @@ public class ClientAccountPage {
 
     private Model model;
 
-    private Connection connection;
-
     @FXML
     public void setModel(Model model, Stage primaryStage) {
         this.model = model;
         this.primaryStage = primaryStage;
+
+
     }
 
-    @FXML
-    void initialize() {
-        homeOnClientPage.setOnAction(actionEvent -> {
-            try {
-                goToHomePageAfterAuth();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+//    private void initializeUserDetails() {
+//        Owner currentUser = model.getCurrentOwner();
+//            String fullName = currentUser.getSurname() + " " + currentUser.getName() + " " + currentUser.getPatronymic();
+//            fullNameLabel.setText(fullName);
+//            addressLabel.setText(currentUser.getAddress());
+//        }
+//    }
 
     @FXML
     private void goToHomePageAfterAuth() throws IOException {
@@ -75,4 +79,22 @@ public class ClientAccountPage {
 
         stage.show();
     }
+
+    @FXML
+    private void changeData() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/ChangeData.fxml"));
+        Parent root = fxmlLoader.load();
+
+        ChangeData changeDataController = fxmlLoader.getController();
+        changeDataController.setModel(model, primaryStage);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) changeOnClientPage.getScene().getWindow();
+        currentStage.close();
+
+        stage.show();
+    }
 }
+

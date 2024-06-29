@@ -11,6 +11,8 @@ public class Model {
 
     private Connection connection;
 
+    private Owner owner = new Owner();
+
     public Model() {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -30,55 +32,104 @@ public class Model {
         }
     }
 
-    // Метод для аутентификации владельца
-    public boolean authenticateOwner(String phoneNumber, String password) {
-        String query = "SELECT COUNT(*) FROM owners WHERE phone_number = ? AND password = ?";
+//    // Метод для аутентификации владельца
+//    public boolean authenticateOwner(String phoneNumber, String password) {
+//        String query = "SELECT COUNT(*) FROM owners WHERE phone_number = ? AND password = ?";
+//        try (PreparedStatement statement = connection.prepareStatement(query)) {
+//            statement.setString(1, phoneNumber);
+//            statement.setString(2, password);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                int count = resultSet.getInt(1);
+//                return count > 0;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+
+//    // Метод для аутентификации врача
+//    public boolean authenticateDoctor(String phoneNumber, String password) {
+//        String query = "SELECT COUNT(*) FROM doctors WHERE phone_number = ? AND password = ?";
+//        try (PreparedStatement statement = connection.prepareStatement(query)) {
+//            statement.setString(1, phoneNumber);
+//            statement.setString(2, password);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                int count = resultSet.getInt(1);
+//                return count > 0;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+
+    // Метод для получения id владельца по номеру телефона и паролю
+    public int getOwnerId(String phoneNumber, String password) {
+        String query = "SELECT owner_id FROM owners WHERE phone_number = ? AND password = ?";
+
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, phoneNumber);
             statement.setString(2, password);
+
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                return count > 0;
+                return resultSet.getInt("owner_id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return -1;
     }
 
-    // Метод для аутентификации врача
-    public boolean authenticateDoctor(String phoneNumber, String password) {
-        String query = "SELECT COUNT(*) FROM doctors WHERE phone_number = ? AND password = ?";
+    // Метод для получения id врача по номеру телефона и паролю
+    public int getDoctorId(String phoneNumber, String password) {
+        String query = "SELECT doctor_id FROM doctors WHERE phone_number = ? AND password = ?";
+
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, phoneNumber);
             statement.setString(2, password);
+
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                return count > 0;
+                return resultSet.getInt("doctor_id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return -1;
     }
 
     // Метод для регистрации владельца
-    public boolean registerOwner(String surname, String name, String patronymic, String phoneNumber, String address, String password) {
+    public boolean registerOwner(Owner owner) {
         String query = "INSERT INTO owners (surname, name, patronymic, phone_number, address, password) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, surname);
-            statement.setString(2, name);
-            statement.setString(3, patronymic);
-            statement.setString(4, phoneNumber);
-            statement.setString(5, address);
-            statement.setString(6, password);
+
+        try (PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setString(1, owner.getSurname());
+            statement.setString(2, owner.getName());
+            statement.setString(3, owner.getPatronymic());
+            statement.setString(4, owner.getPhoneNumber());
+            statement.setString(5, owner.getAddress());
+            statement.setString(6, owner.getPassword());
+
             int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0;
+
+            if (rowsInserted > 0) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int ownerId = generatedKeys.getInt(1);
+                    return true;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
 

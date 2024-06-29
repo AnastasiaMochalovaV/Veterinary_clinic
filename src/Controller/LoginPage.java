@@ -48,9 +48,8 @@ public class LoginPage {
 
     private Model model;
 
-    private Connection connection;
-
-    private boolean isOwner;
+    private String username;
+    private String password;
 
     @FXML
     public void setModel(Model model, Stage primaryStage) {
@@ -59,88 +58,31 @@ public class LoginPage {
     }
 
     @FXML
-    void initialize() {
-        lastOnLoginPage.setOnAction(actionEvent -> {
-            try {
-                openHomePage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        loginOnLoginPage.setOnAction(actionEvent -> {
-            try {
-                openRegistrationPage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        authOnLoginPage.setOnAction(actionEvent -> {
-            try {
-                checkAccess();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    @FXML
     private void openHomePage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
-        Parent root = fxmlLoader.load();
-
-        HomePage homePageController = fxmlLoader.getController();
-        homePageController.setModel(model, primaryStage);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-
-        Stage currentStage = (Stage) lastOnLoginPage.getScene().getWindow();
-        currentStage.close();
-
-        stage.show();
-    }
-
-    @FXML
-    private void openRegistrationPage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/RegistrationPage.fxml"));
-        Parent root = fxmlLoader.load();
-
-        RegistrationPage registrationPageController = fxmlLoader.getController();
-        registrationPageController.setModel(model, primaryStage);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+        Parent root = loader.load();
+        HomePage controller = loader.getController();
+        controller.setModel(model, primaryStage);
 
         Stage currentStage = (Stage) loginOnLoginPage.getScene().getWindow();
         currentStage.close();
 
-        stage.show();
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
     }
 
     @FXML
-    private void checkAccess() throws IOException {
-        String username = loginNameOnLoginPage.getText();
-        String password = passwordOnLoginPage.getText();
+    private void openRegistrationPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/RegistrationPage.fxml"));
+        Parent root = loader.load();
+        RegistrationPage controller = loader.getController();
+        controller.setModel(model, primaryStage);
 
-        if (checkDoctorOnLoginPage.isSelected()) {
-            boolean isDoctorAuthenticated = model.authenticateDoctor(username, password);
-            if (isDoctorAuthenticated) {
-                isOwner = false;
-                openHomePageAfterAuth("/View/HomePageAfterAuth.fxml");
-            } else {
-                showAlert("Неверные данные врача");
-            }
-        } else {
-            boolean isOwnerAuthenticated = model.authenticateOwner(username, password);
-            if (isOwnerAuthenticated) {
-                isOwner = true;
-                openHomePageAfterAuth("/View/HomePageAfterAuth.fxml");
-            } else {
-                showAlert("Пользователь не найден");
-            }
-        }
+        Stage currentStage = (Stage) loginOnLoginPage.getScene().getWindow();
+        currentStage.close();
+
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
     }
 
     private void showAlert(String message) {
@@ -151,26 +93,37 @@ public class LoginPage {
         alert.showAndWait();
     }
 
-    private void openHomePageAfterAuth(String fxmlPath) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = fxmlLoader.load();
-
-        HomePageAfterAuth homePageAfterAuthController = fxmlLoader.getController();
-        homePageAfterAuthController.setModel(model, primaryStage);
-        homePageAfterAuthController.setUserType(isOwner);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-
-        Stage currentStage = (Stage) authOnLoginPage.getScene().getWindow();
-        currentStage.close();
-
-        stage.show();
+    @FXML
+    private void openHomePageAfterAuth() throws IOException {
+        boolean isOwner = !checkDoctorOnLoginPage.isSelected();
+        if (isOwner) {
+            int idOwner = model.getOwnerId(loginNameOnLoginPage.getText(), passwordOnLoginPage.getText());
+            if (idOwner != -1) {
+                loadHomePageAfterAuth(isOwner);
+            } else {
+                showAlert("Пользователь не найден");
+            }
+        } else {
+            int idDoc = model.getDoctorId(loginNameOnLoginPage.getText(), passwordOnLoginPage.getText());
+            if (idDoc != -1) {
+                loadHomePageAfterAuth(isOwner);
+            } else {
+                showAlert("Пользователь не найден");
+            }
+        }
     }
 
-    @FXML
-    private void clearFields() {
-        loginNameOnLoginPage.clear();
-        passwordOnLoginPage.clear();
+    private void loadHomePageAfterAuth(boolean isOwner) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePageAfterAuth.fxml"));
+        Parent root = loader.load();
+        HomePageAfterAuth controller = loader.getController();
+        controller.setModel(model, primaryStage);
+        controller.setUserType(isOwner);
+
+        Stage currentStage = (Stage) loginOnLoginPage.getScene().getWindow();
+        currentStage.close();
+
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
     }
 }

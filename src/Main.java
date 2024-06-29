@@ -9,7 +9,6 @@ import Controller.HomePage;
 import Controller.LoginPage;
 
 public class Main extends Application{
-    Model model = new Model();
 
     public static void main(String[] args) {
         launch(args);
@@ -17,11 +16,12 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomePage.fxml"));
+
         Parent root = loader.load();
 
         HomePage controller = loader.getController();
-
+        Model model = new Model();
         controller.setModel(model, primaryStage);
 
         primaryStage.setTitle("Ветеринарная клиника");
