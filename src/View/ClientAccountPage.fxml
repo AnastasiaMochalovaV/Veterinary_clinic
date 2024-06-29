@@ -2,14 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -21,8 +19,8 @@
             <center>
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: F1F2F4;" BorderPane.alignment="CENTER">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="433.0" layoutX="110.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="960.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="148.0" />
-                        <VBox layoutX="90.0" layoutY="135.0" prefHeight="356.0" prefWidth="628.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="164.4000000000001">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="449.0" layoutX="110.4" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1059.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="132.0" />
+                        <VBox layoutX="124.8" layoutY="151.0" prefHeight="340.0" prefWidth="1026.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="129.0">
                             <children>
                                 <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Личные данные" textAlignment="CENTER" wrappingWidth="1025.2900085449219">
                                     <font>
@@ -55,74 +53,22 @@
                                         <Font name="Gilroy-Medium" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="changeOnClientPage" onAction="#changeData" mnemonicParsing="false" prefWidth="118.0" text="Редактировать">
+                                <Button fx:id="changeOnClientPage" mnemonicParsing="false" onAction="#changeData" prefWidth="118.0" text="Редактировать">
                                     <VBox.margin>
                                         <Insets top="20.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="recordOnClientPage" mnemonicParsing="false" prefHeight="26.0" prefWidth="165.0" text="Записаться на прием">
+                                <Button fx:id="recordOnClientPage" onAction="#createAppointment" mnemonicParsing="false" prefHeight="26.0" prefWidth="165.0" text="Записаться на прием">
                                     <VBox.margin>
                                         <Insets top="40.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="История приемов" textAlignment="CENTER" wrappingWidth="1024.6800994873047">
-                                    <font>
-                                        <Font name="Gilroy-Medium" size="20.0" />
-                                    </font>
-                                    <VBox.margin>
-                                        <Insets top="50.0" />
-                                    </VBox.margin>
-                                </Text>
-                                <ComboBox fx:id="chooseDogOnClientPage" prefHeight="26.0" prefWidth="216.0" promptText="Выберите животное из списка" />
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Время">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Доктор">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Диагноз">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets top="20.0" />
-                                    </VBox.margin>
-                                </HBox>
                             </children>
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
                         </VBox>
-                        <Button fx:id="homeOnClientPage" layoutX="196.0" layoutY="82.0" onAction="#goToHomePageAfterAuth" mnemonicParsing="false" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="98.0">
+                        <Button fx:id="homeOnClientPage" layoutX="196.0" layoutY="82.0" mnemonicParsing="false" onAction="#goToHomePageAfterAuth" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="98.0">
                             <font>
                                 <Font name="Gilroy-Regular" size="20.0" />
                             </font>

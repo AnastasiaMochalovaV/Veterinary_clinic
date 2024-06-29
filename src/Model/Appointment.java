@@ -7,6 +7,11 @@ public class Appointment {
     private int animalId;
     private int doctorId;
     private int diagnosisId;
+    private String ownerSurname;
+    private String ownerName;
+    private String ownerPatronymic;
+    private String animalName;
+    private String breedName;
 
     public Appointment() {
     }
@@ -66,6 +71,46 @@ public class Appointment {
 
     public void setDiagnosisId(int diagnosisId) {
         this.diagnosisId = diagnosisId;
+    }
+
+    public String getAnimalName() {
+        return animalName;
+    }
+
+    public void setAnimalName(String animalName) {
+        this.animalName = animalName;
+    }
+
+    public String getBreedName() {
+        return breedName;
+    }
+
+    public void setBreedName(String breedName) {
+        this.breedName = breedName;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerPatronymic() {
+        return ownerPatronymic;
+    }
+
+    public void setOwnerPatronymic(String ownerPatronymic) {
+        this.ownerPatronymic = ownerPatronymic;
+    }
+
+    public String getOwnerSurname() {
+        return ownerSurname;
+    }
+
+    public void setOwnerSurname(String ownerSurname) {
+        this.ownerSurname = ownerSurname;
     }
 
     @Override

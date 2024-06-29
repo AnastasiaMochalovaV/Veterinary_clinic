@@ -26,12 +26,12 @@
                         <Image url="@../Assets/Logo.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="accountOnHomePage" layoutX="476.0" layoutY="21.0" onAction="#openAccountPage" mnemonicParsing="false" style="-fx-background-color: #DFD8D1;" text="Личный кабинет" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="45.0">
+                <Button fx:id="accountOnHomePage" layoutX="476.0" layoutY="21.0" mnemonicParsing="false" onAction="#openAccountPage" style="-fx-background-color: #DFD8D1;" text="Личный кабинет" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="45.0">
                     <font>
                         <Font name="Gilroy-Medium" size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="exitOnHomePage" layoutX="382.0" layoutY="21.0" onAction="#exitToOpenPage" mnemonicParsing="false" style="-fx-background-color: #DFD8D1;" text="Выйти" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="45.0">
+                <Button fx:id="exitOnHomePage" layoutX="382.0" layoutY="21.0" mnemonicParsing="false" onAction="#exitToOpenPage" style="-fx-background-color: #DFD8D1;" text="Выйти" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="45.0">
                     <font>
                         <Font name="Gilroy-Regular" size="20.0" />
                     </font>
@@ -46,11 +46,6 @@
                         <Font name="Gilroy-Bold" size="53.0" />
                     </font>
                 </Text>
-                <Button layoutX="1059.0" layoutY="64.0" mnemonicParsing="false" style="-fx-background-color: #DFD8D1;" text="Наши сотрудники" AnchorPane.rightAnchor="554.0" AnchorPane.topAnchor="45.0">
-                    <font>
-                        <Font name="Gilroy-Regular" size="20.0" />
-                    </font>
-                </Button>
                 <Text fill="#2b2b2b" layoutX="100.0" layoutY="499.6219993591309" strokeType="OUTSIDE" strokeWidth="0.0" text="КЛИНИКА" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="454.0">
                     <font>
                         <Font name="Gilroy-Bold" size="53.0" />

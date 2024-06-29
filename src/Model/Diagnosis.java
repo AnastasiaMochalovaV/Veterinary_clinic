@@ -9,7 +9,6 @@ public class Diagnosis {
 
     public Diagnosis(int diagnosisId, String status, int diseaseId) {
         this.diagnosisId = diagnosisId;
-        this.status = status;
         this.diseaseId = diseaseId;
     }
 
@@ -19,14 +18,6 @@ public class Diagnosis {
 
     public void setDiagnosisId(int diagnosisId) {
         this.diagnosisId = diagnosisId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getDiseaseId() {

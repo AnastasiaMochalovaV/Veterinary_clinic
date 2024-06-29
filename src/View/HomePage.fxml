@@ -46,11 +46,6 @@
                   <Font name="Gilroy-Bold" size="53.0" />
                </font>
             </Text>
-            <Button layoutX="1059.0" layoutY="64.0" mnemonicParsing="false" style="-fx-background-color: #DFD8D1;" text="Наши сотрудники" AnchorPane.rightAnchor="554.0" AnchorPane.topAnchor="45.0">
-               <font>
-                  <Font name="Gilroy-Regular" size="20.0" />
-               </font>
-            </Button>
             <Text fill="#2b2b2b" layoutX="100.0" layoutY="499.6219993591309" strokeType="OUTSIDE" strokeWidth="0.0" text="КЛИНИКА" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="404.0">
                <font>
                   <Font name="Gilroy-Bold" size="53.0" />

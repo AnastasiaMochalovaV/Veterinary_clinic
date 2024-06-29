@@ -3,15 +3,23 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
 import Model.Model;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Model.Doctor;
+import Model.Appointment;
+
 
 public class DoctorAccountPage {
 
@@ -25,46 +33,25 @@ public class DoctorAccountPage {
     private Label addressLabel;
 
     @FXML
-    private TableView<?> bookingTable;
-
-    @FXML
-    private TableView<?> bookingTable1;
-
-    @FXML
     private TableColumn<?, ?> breedRelevant;
 
     @FXML
     private Button changeOnDoctorPage;
 
     @FXML
-    private ComboBox<?> chooseDogOnClientPage;
-
-    @FXML
-    private TableColumn<?, ?> date;
+    private Button confirm;
 
     @FXML
     private TableColumn<?, ?> dateRelevant;
 
     @FXML
-    private TableColumn<?, ?> diagnosis;
-
-    @FXML
     private TableColumn<?, ?> diagnosisRelevant;
-
-    @FXML
-    private TableColumn<?, ?> doctor;
 
     @FXML
     private Label fullNameLabel;
 
     @FXML
-    private TextField fullNameOwner;
-
-    @FXML
     private Button homeOnDoctorPage;
-
-    @FXML
-    private CheckBox notOwner;
 
     @FXML
     private TableColumn<?, ?> ownerRelevant;
@@ -73,13 +60,18 @@ public class DoctorAccountPage {
     private Button recordOnDoctorPage;
 
     @FXML
-    private TableColumn<?, ?> time;
+    private TableView<?> tableRelevant;
 
     @FXML
     private TableColumn<?, ?> timeRelevant;
 
     @FXML
     void changeData(ActionEvent event) {
+
+    }
+
+    @FXML
+    void createAppointment(ActionEvent event) {
 
     }
 
@@ -97,14 +89,24 @@ public class DoctorAccountPage {
         this.model = model;
         this.primaryStage = primaryStage;
         initializeUserDetails();
+        loadCurrentAppointments();
     }
 
+    @FXML
     private void initializeUserDetails() {
         Doctor currentUser = model.getCurrentDoctor();
         if (currentUser != null) {
             fullNameLabel.setText(currentUser.getName());
             addressLabel.setText(currentUser.getAddress());
         }
+    }
+
+    @FXML
+    private void loadCurrentAppointments() {
+//        dateRelevant.setCellValueFactory(new PropertyValueFactory<>("date"));
+//        timeRelevant.setCellValueFactory(new PropertyValueFactory<>("time"));
+//        breedRelevant.setCellValueFactory(new PropertyValueFactory<>("breed"));
+//        ownerRelevant.setCellValueFactory(new PropertyValueFactory<>("owner"));
     }
 
     @FXML

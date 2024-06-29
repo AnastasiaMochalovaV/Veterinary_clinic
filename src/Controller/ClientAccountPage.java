@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 
 import Model.Model;
@@ -11,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import Model.Owner;
@@ -31,9 +29,6 @@ public class ClientAccountPage {
     private Button changeOnClientPage;
 
     @FXML
-    private ComboBox<?> chooseDogOnClientPage;
-
-    @FXML
     private Label fullNameLabel;
 
     @FXML
@@ -43,7 +38,6 @@ public class ClientAccountPage {
     private Button recordOnClientPage;
 
     private Stage primaryStage;
-
     private Model model;
 
     @FXML
@@ -86,13 +80,36 @@ public class ClientAccountPage {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/ChangeData.fxml"));
         Parent root = fxmlLoader.load();
 
-        ChangeData changeDataController = fxmlLoader.getController();
-        changeDataController.setModel(model, primaryStage);
+        ChangeData changeData = fxmlLoader.getController();
+        changeData.setModel(model, primaryStage);
+
+        Owner currentOwner = model.getCurrentOwner();
+        changeData.setOwnerDetails(currentOwner);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
 
         Stage currentStage = (Stage) changeOnClientPage.getScene().getWindow();
+        currentStage.close();
+
+        stage.show();
+    }
+
+    @FXML
+    private void createAppointment() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/AppointmentPage.fxml"));
+        Parent root = fxmlLoader.load();
+
+        AppointmentPage appointmentPageController = fxmlLoader.getController();
+        appointmentPageController.setModel(model, primaryStage);
+
+        Owner currentOwner = model.getCurrentOwner();
+        appointmentPageController.setOwnerDetails(currentOwner);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        Stage currentStage = (Stage) recordOnClientPage.getScene().getWindow();
         currentStage.close();
 
         stage.show();

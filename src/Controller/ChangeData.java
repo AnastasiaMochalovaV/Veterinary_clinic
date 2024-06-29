@@ -1,14 +1,20 @@
 package Controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Model.Model;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import Model.Model;
+import Model.Owner;
+import Model.Doctor;
 
 public class ChangeData {
 
@@ -41,6 +47,7 @@ public class ChangeData {
 
     private Model model;
     private Stage primaryStage;
+//    private boolean isOwner;
 
     @FXML
     public void setModel(Model model, Stage primaryStage) {
@@ -48,26 +55,100 @@ public class ChangeData {
         this.primaryStage = primaryStage;
     }
 
-//    @FXML
-//    private void saveData() {
-//        // Логика для сохранения данных
+    public void setOwnerDetails(Owner owner) {
+        nameOnRegistrationPage.setText(owner.getName());
+        surnameOnRegistrationPage.setText(owner.getSurname());
+        patronymicOnRegistrationPage.setText(owner.getPatronymic());
+        phoneNumberOnRegistrationPage.setText(owner.getPhoneNumber());
+        addressOnRegistrationPage.setText(owner.getAddress());
+    }
+
+    @FXML
+    private void openRegistrationPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ClientAccountPage.fxml"));
+        Parent root = loader.load();
+        ClientAccountPage controller = loader.getController();
+        controller.setModel(model, primaryStage);
+
+        Stage currentStage = (Stage) lastOnRegistrationPage.getScene().getWindow();
+        currentStage.close();
+
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
+    }
+
+    @FXML
+    private void saveUserData() throws SQLException {
+        Owner owner = model.getCurrentOwner();
+        owner.setSurname(surnameOnRegistrationPage.getText());
+        owner.setName(nameOnRegistrationPage.getText());
+        owner.setPatronymic(patronymicOnRegistrationPage.getText());
+        owner.setPhoneNumber(phoneNumberOnRegistrationPage.getText());
+        owner.setAddress(addressOnRegistrationPage.getText());
+        model.updateOwner(owner);
+    }
+
+    @FXML
+    private void loginOnRegistrationPageClicked() throws SQLException, IOException {
+        saveUserData();
+        openRegistrationPage();
+    }
+
+
+
+//    public void setDoctorDetails(Doctor doctor) {
+//        nameOnRegistrationPage.setText(doctor.getName());
+//        surnameOnRegistrationPage.setText(doctor.getSurname());
+//        patronymicOnRegistrationPage.setText(doctor.getPatronymic());
+//        phoneNumberOnRegistrationPage.setText(doctor.getPhoneNumber());
+//        addressOnRegistrationPage.setText(doctor.getAddress());
 //    }
-//
+
 //    @FXML
-//    private void cancelChange() throws IOException {
-//        // Вернуться на страницу клиента
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/ClientAccountPage.fxml"));
-//        Parent root = fxmlLoader.load();
+//    private void openRegistrationPage() throws IOException {
+//        if (isOwner) {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ClientAccountPage.fxml"));
+//            Parent root = loader.load();
+//            ClientAccountPage controller = loader.getController();
+//            controller.setModel(model, primaryStage);
 //
-//        ClientAccountPage clientAccountPageController = fxmlLoader.getController();
-//        clientAccountPageController.setModel(model, primaryStage);
+//            Stage currentStage = (Stage) lastOnRegistrationPage.getScene().getWindow();
+//            currentStage.close();
 //
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root));
+//            primaryStage.setScene(new Scene(root, 1280, 720));
+//            primaryStage.show();
+//        } else {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DoctorAccountPage.fxml"));
+//            Parent root = loader.load();
+//            DoctorAccountPage controller = loader.getController();
+//            controller.setModel(model, primaryStage);
 //
-//        Stage currentStage = (Stage) cancelButton.getScene().getWindow();
-//        currentStage.close();
+//            Stage currentStage = (Stage) lastOnRegistrationPage.getScene().getWindow();
+//            currentStage.close();
 //
-//        stage.show();
+//            primaryStage.setScene(new Scene(root, 1280, 720));
+//            primaryStage.show();
+//        }
+//    }
+
+//    @FXML
+//    private void saveUserData() throws SQLException {
+//        if (isOwner) {
+//            Owner owner = model.getCurrentOwner();
+//            owner.setSurname(surnameOnRegistrationPage.getText());
+//            owner.setName(nameOnRegistrationPage.getText());
+//            owner.setPatronymic(patronymicOnRegistrationPage.getText());
+//            owner.setPhoneNumber(phoneNumberOnRegistrationPage.getText());
+//            owner.setAddress(addressOnRegistrationPage.getText());
+//            model.updateOwner(owner);
+//        } else {
+//            Doctor doctor = model.getCurrentDoctor();
+//            doctor.setName(nameOnRegistrationPage.getText());
+//            doctor.setSurname(surnameOnRegistrationPage.getText());
+//            doctor.setPatronymic(patronymicOnRegistrationPage.getText());
+//            doctor.setPhoneNumber(phoneNumberOnRegistrationPage.getText());
+//            doctor.setAddress(addressOnRegistrationPage.getText());
+//            model.updateDoctor(doctor);
+//        }
 //    }
 }
