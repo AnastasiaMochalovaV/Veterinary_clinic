@@ -2,10 +2,14 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Model.Model;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import Model.Model;
 
 public class AppointmentPage {
 
@@ -39,9 +43,15 @@ public class AppointmentPage {
     @FXML
     private TextField surnameOnAppointmentPage;
 
-    @FXML
-    void initialize() {
+    private Stage primaryStage;
 
+    private Model model;
+
+
+    @FXML
+    public void setModel(Model model, Stage primaryStage) {
+        this.model = model;
+        this.primaryStage = primaryStage;
     }
 
 }

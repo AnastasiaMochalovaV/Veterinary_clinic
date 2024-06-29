@@ -17,6 +17,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Model.Model;
+import Model.Owner;
+import Model.Doctor;
 
 public class LoginPage {
 
@@ -99,6 +101,8 @@ public class LoginPage {
         if (isOwner) {
             int idOwner = model.getOwnerId(loginNameOnLoginPage.getText(), passwordOnLoginPage.getText());
             if (idOwner != -1) {
+                Owner owner = model.getOwnerById(idOwner);
+                model.setCurrentOwner(owner);
                 loadHomePageAfterAuth(isOwner);
             } else {
                 showAlert("Пользователь не найден");
@@ -106,6 +110,8 @@ public class LoginPage {
         } else {
             int idDoc = model.getDoctorId(loginNameOnLoginPage.getText(), passwordOnLoginPage.getText());
             if (idDoc != -1) {
+                Doctor doctor = model.getDoctorById(idDoc);
+                model.setCurrentDoctor(doctor);
                 loadHomePageAfterAuth(isOwner);
             } else {
                 showAlert("Пользователь не найден");

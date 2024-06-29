@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import Model.Owner;
 
 public class ClientAccountPage {
 
@@ -49,17 +50,17 @@ public class ClientAccountPage {
     public void setModel(Model model, Stage primaryStage) {
         this.model = model;
         this.primaryStage = primaryStage;
-
-
+        initializeUserDetails();
     }
 
-//    private void initializeUserDetails() {
-//        Owner currentUser = model.getCurrentOwner();
-//            String fullName = currentUser.getSurname() + " " + currentUser.getName() + " " + currentUser.getPatronymic();
-//            fullNameLabel.setText(fullName);
-//            addressLabel.setText(currentUser.getAddress());
-//        }
-//    }
+    private void initializeUserDetails() {
+        Owner currentUser = model.getCurrentOwner();
+        if (currentUser != null) {
+            String fullName = currentUser.getSurname() + " " + currentUser.getName() + " " + currentUser.getPatronymic();
+            fullNameLabel.setText(fullName);
+            addressLabel.setText(currentUser.getAddress());
+        }
+    }
 
     @FXML
     private void goToHomePageAfterAuth() throws IOException {

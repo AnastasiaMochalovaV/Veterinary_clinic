@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,16 +19,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane prefHeight="938.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DoctorAccountPage">
+<ScrollPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DoctorAccountPage">
     <content>
-        <BorderPane>
-            <center>
-                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: F1F2F4;" BorderPane.alignment="CENTER">
+        <BorderPane prefHeight="1200.0" prefWidth="1280.0">
+            <top>
+                <ImageView fitHeight="30.0" fitWidth="454.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../Assets/Logo.png" />
+                    </image>
+                    <BorderPane.margin>
+                        <Insets top="45.0" />
+                    </BorderPane.margin>
+                </ImageView>
+            </top>
+         <right>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1190.0" prefWidth="1280.0" style="-fx-background-color: F1F2F4;" BorderPane.alignment="CENTER">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="433.0" layoutX="110.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="960.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="148.0" />
-                        <VBox layoutX="90.0" layoutY="135.0" prefHeight="356.0" prefWidth="628.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="164.4000000000001">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="660.0" layoutX="100.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1076.0" AnchorPane.bottomAnchor="451.4000000000001" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="79.0" />
+                        <VBox layoutX="112.2" layoutY="91.0" prefHeight="614.0" prefWidth="1053.0" AnchorPane.leftAnchor="112.2" AnchorPane.rightAnchor="115.79999999999995">
                             <children>
-                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Личные данные" textAlignment="CENTER" wrappingWidth="1025.2900085449219">
+                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Личный кабинет" wrappingWidth="1025.2900085449219">
                                     <font>
                                         <Font name="Gilroy-Medium" size="26.0" />
                                     </font>
@@ -44,72 +56,50 @@
                                         <Font name="Gilroy-Medium" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="changeOnDoctorPage" mnemonicParsing="false" prefWidth="118.0" text="Редактировать">
+                                <Button fx:id="changeOnDoctorPage" mnemonicParsing="false" onAction="#changeData" prefHeight="26.0" prefWidth="138.0" text="Редактировать">
                                     <VBox.margin>
-                                        <Insets top="20.0" />
+                                        <Insets bottom="30.0" top="15.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="recordOnDoctorPage" mnemonicParsing="false" prefHeight="26.0" prefWidth="212.0" text="Записать животное на прием">
-                                    <VBox.margin>
-                                        <Insets top="40.0" />
-                                    </VBox.margin>
-                                </Button>
-                        <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Ближайшие приемы" textAlignment="CENTER" wrappingWidth="1024.6800994873047">
+                        <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Записать на прием" wrappingWidth="1024.6800994873047">
                            <font>
                               <Font name="Gilroy-Medium" size="20.0" />
                            </font>
                         </Text>
+                                <Button fx:id="recordOnDoctorPage" onAction="#createAppointment" mnemonicParsing="false" prefHeight="26.0" prefWidth="136.0" text="Создать запись" textAlignment="CENTER">
+                                    <VBox.margin>
+                                        <Insets bottom="30.0" top="20.0" />
+                                    </VBox.margin>
+                                </Button>
+                        <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Ближайшие приемы" textAlignment="CENTER" wrappingWidth="1052.4134979248047">
+                           <font>
+                              <Font name="Gilroy-Medium" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TableView fx:id="bookingTable" prefHeight="200.0" prefWidth="861.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #c8c8c8;">
+                           <columns>
+                              <TableColumn fx:id="dateRelevant" prefWidth="100.0" text="Дата" />
+                              <TableColumn fx:id="timeRelevant" prefWidth="100.0" text="Время" />
+                              <TableColumn fx:id="breedRelevant" prefWidth="99.73345947265625" text="Порода" />
+                              <TableColumn fx:id="ownerRelevant" prefWidth="254.13327026367188" text="Владелец" />
+                              <TableColumn fx:id="diagnosisRelevant" prefWidth="496.0000122070312" text="Диагноз" />
+                           </columns>
+                        </TableView>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Время">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Владелец">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Порода">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Диагноз">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
                               <VBox prefHeight="200.0" prefWidth="100.0" />
                            </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
                         </HBox>
-                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="История приемов" textAlignment="CENTER" wrappingWidth="1024.6800994873047">
+                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="История приемов" textAlignment="CENTER" wrappingWidth="1054.5467987060547">
                                     <font>
                                         <Font name="Gilroy-Medium" size="20.0" />
                                     </font>
@@ -117,87 +107,42 @@
                                         <Insets top="50.0" />
                                     </VBox.margin>
                                 </Text>
-                        <TextField promptText="Фамилия Имя Отчество" />
-                        <CheckBox mnemonicParsing="false" text="Владельца нет" />
-                        <ComboBox fx:id="chooseDogOnClientPage" prefHeight="26.0" prefWidth="216.0" promptText="Выберите животное из списка" />
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Время">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Доктор">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Диагноз">
-                                                    <font>
-                                                        <Font name="Gilroy-Medium" size="18.0" />
-                                                    </font>
-                                                </Text>
-                                            </children>
-                                        </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Владелец">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Порода">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата">
-                                       <font>
-                                          <Font name="Gilroy-Medium" size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets top="20.0" />
-                                    </VBox.margin>
-                                </HBox>
+                        <Text fill="#140b02" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите ФИО клиента и выберите животное из списка" wrappingWidth="1054.5467987060547">
+                           <font>
+                              <Font name="Gilroy-Medium" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="fullNameOwner" prefHeight="26.0" prefWidth="1053.0" promptText="Фамилия Имя Отчество" style="-fx-border-style: #ffffff;">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></TextField>
+                        <CheckBox fx:id="notOwner" mnemonicParsing="false" text="Владельца нет">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></CheckBox>
+                        <ComboBox fx:id="chooseDogOnClientPage" prefHeight="26.0" prefWidth="216.0" promptText="Выберите животное из списка">
+                           <VBox.margin>
+                              <Insets bottom="15.0" top="15.0" />
+                           </VBox.margin></ComboBox>
+                        <TableView fx:id="bookingTable1" prefHeight="50.0" prefWidth="795.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #c8c8c8;">
+                           <columns>
+                              <TableColumn fx:id="date" prefWidth="121.3333511352539" text="Дата" />
+                              <TableColumn fx:id="time" prefWidth="101.60003662109375" text="Время" />
+                              <TableColumn fx:id="doctor" prefWidth="279.199951171875" text="Врач" />
+                              <TableColumn fx:id="diagnosis" prefWidth="549.5999145507812" text="Диагноз" />
+                           </columns>
+                        </TableView>
                             </children>
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
                         </VBox>
-                        <Button fx:id="homeOnDoctorPage" layoutX="196.0" layoutY="82.0" mnemonicParsing="false" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="98.0">
+                        <Button fx:id="homeOnDoctorPage" layoutX="106.2" layoutY="40.0" mnemonicParsing="false" onAction="#goToHomePageAfterAuth" style="-fx-background-color: F1F2F4;" text="На главный экран" AnchorPane.leftAnchor="106.2" AnchorPane.topAnchor="40.0">
                             <font>
-                                <Font name="Gilroy-Regular" size="20.0" />
+                                <Font name="Gilroy-Regular" size="18.0" />
                             </font>
                             <opaqueInsets>
                                 <Insets />
@@ -205,17 +150,7 @@
                         </Button>
                     </children>
                 </AnchorPane>
-            </center>
-            <top>
-                <ImageView fitHeight="30.0" fitWidth="454.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                    <image>
-                        <Image url="@../Assets/Logo.png" />
-                    </image>
-                    <BorderPane.margin>
-                        <Insets top="45.0" />
-                    </BorderPane.margin>
-                </ImageView>
-            </top>
+         </right>
         </BorderPane>
     </content>
 </ScrollPane>

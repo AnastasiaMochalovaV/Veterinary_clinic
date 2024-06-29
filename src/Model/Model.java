@@ -10,8 +10,10 @@ public class Model {
     private static final String DB_PASSWORD = "veterinary_clinic";
 
     private Connection connection;
-
+    private Owner currentOwner;
+    private Doctor currentDoctor;
     private Owner owner = new Owner();
+    private Doctor doctor = new Doctor();
 
     public Model() {
         try {
@@ -22,49 +24,62 @@ public class Model {
         }
     }
 
-    public void close() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    // Методы для работы с текущим пользователем
+    public Owner getCurrentOwner() {
+        return currentOwner;
     }
 
-//    // Метод для аутентификации владельца
-//    public boolean authenticateOwner(String phoneNumber, String password) {
-//        String query = "SELECT COUNT(*) FROM owners WHERE phone_number = ? AND password = ?";
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            statement.setString(1, phoneNumber);
-//            statement.setString(2, password);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                int count = resultSet.getInt(1);
-//                return count > 0;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    public void setCurrentOwner(Owner currentOwner) {
+        this.currentOwner = currentOwner;
+    }
 
-//    // Метод для аутентификации врача
-//    public boolean authenticateDoctor(String phoneNumber, String password) {
-//        String query = "SELECT COUNT(*) FROM doctors WHERE phone_number = ? AND password = ?";
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            statement.setString(1, phoneNumber);
-//            statement.setString(2, password);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                int count = resultSet.getInt(1);
-//                return count > 0;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    public Doctor getCurrentDoctor() {
+        return currentDoctor;
+    }
+
+    public void setCurrentDoctor(Doctor currentDoctor) {
+        this.currentDoctor = currentDoctor;
+    }
+
+    public Owner getOwnerById(int ownerId) {
+        String query = "SELECT surname, name, patronymic, phone_number, address FROM owners WHERE owner_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, ownerId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Owner owner = new Owner();
+                owner.setOwnerId(ownerId);
+                owner.setSurname(resultSet.getString("surname"));
+                owner.setName(resultSet.getString("name"));
+                owner.setPatronymic(resultSet.getString("patronymic"));
+                owner.setPhoneNumber(resultSet.getString("phone_number"));
+                owner.setAddress(resultSet.getString("address"));
+                return owner;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Doctor getDoctorById(int doctorId) {
+        String query = "SELECT name, address, phone_number FROM doctors WHERE doctor_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, doctorId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Doctor doctor = new Doctor();
+                doctor.setDoctorId(doctorId);
+                doctor.setName(resultSet.getString("name"));
+                doctor.setAddress(resultSet.getString("address"));
+                doctor.setPhoneNumber(resultSet.getString("phone_number"));
+                return doctor;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     // Метод для получения id владельца по номеру телефона и паролю
     public int getOwnerId(String phoneNumber, String password) {
